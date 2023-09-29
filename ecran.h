@@ -14,8 +14,8 @@
 #define CHAR_BEL 0x07
 #define CHAR_BS 0x08
 #define CHAR_HT 0x09
-#define CHAR_LF 0x0B
-#define CHAR_VT 0x08
+#define CHAR_LF 0x0A
+#define CHAR_VT 0x0B
 #define CHAR_FF 0x0C
 #define CHAR_CR 0x0D
 #define CHAR_SUB 0x1A
@@ -52,5 +52,7 @@ void traite_car(char c);
 void defilement(void);
 
 void console_putbytes(const char *s, int len);
+
+void get_curseur(uint16_t *lig, uint16_t *col);
 
 #endif

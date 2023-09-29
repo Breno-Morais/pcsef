@@ -26,6 +26,9 @@ void efface_ecran(void)
 
 void place_curseur(uint32_t lig, uint32_t col)
 {
+	pos_lig = lig;
+	pos_col = col;
+	
 	uint16_t pos_cursor = col + lig * NCOL;
 	uint8_t bas_pos_cursor = (uint8_t)(pos_cursor & 0x00FF);
 	uint8_t haut_pos_cursor = (uint8_t)((pos_cursor & 0xFF00) >> 8);
@@ -122,4 +125,9 @@ void console_putbytes(const char *s, int len)
 	{
 		traite_car(s[i]);
 	}
+}
+
+void get_curseur(uint16_t *lig, uint16_t *col){
+	*lig = pos_lig;
+	*col = pos_col;
 }

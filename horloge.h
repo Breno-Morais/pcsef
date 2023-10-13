@@ -2,7 +2,6 @@
 #define __HORLOGE_H__
 
 #include <inttypes.h>
-#include <segment.h>
 #include <ecran.h>
 #include <segment.h>
 

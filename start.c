@@ -4,7 +4,9 @@
 #include <horloge.h>
 #include <procs.h>
 
-proc *PROC_TABLE[SIZE_PROC_TABLE] = {};
+proc **PROC_TABLE;
+proc *actif;
+sys_state state;
 
 void kernel_start(void)
 {
@@ -13,14 +15,22 @@ void kernel_start(void)
     efface_ecran();
 
     // initialisation des structures de processus
-    proc proc_idle = { .pid = 0, .nom = "idle", .etat = ELU, .regs = { 0 }, .exec_stack = { 0 }};
+    init_sys_state();
+    PROC_TABLE = (proc **) malloc(SIZE_PROC_TABLE * sizeof(proc));
 
-    proc proc_1 = { .pid = 1, .nom = "proc1", .etat = ACTIVABLE, .regs = { 0 }, .exec_stack = { 0 }};
-    proc_1.exec_stack[0] = (uint32_t) proc1;
-    proc_1.regs[1] = (uint32_t) proc_1.exec_stack;
+    proc proc_idle = { .pid = 0, .nom = "idle", .etat = ELU};
+    proc_idle.regs = (uint32_t *) malloc(NUMBER_REGS * sizeof(uint32_t));
+    proc_idle.exec_stack = (uint32_t *) malloc(SIZE_EXEC_STACK * sizeof(uint32_t));
+    actif = &proc_idle;
+
+    state.last_reserved_pid++;
+    state.n_procs++;
 
     PROC_TABLE[0] = &proc_idle;
-    PROC_TABLE[1] = &proc_1;
+    cree_processus(proc1, "proc1");
+
+    printf("[%s]", PROC_TABLE[0]->nom);
+    printf("[%s]", PROC_TABLE[1]->nom);
 
     // démasquage des interruptions externes
     sti();

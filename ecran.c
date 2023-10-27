@@ -132,9 +132,9 @@ void get_curseur(uint16_t *lig, uint16_t *col){
 	*col = pos_col;
 }
 
-void printv(uint32_t*start, uint8_t size)
+void printv(uint32_t*start, uint8_t size, uint8_t id)
 {
-	printf("V: [");
+	printf("V%u: [", id);
 	for(int i = 0; i < size - 1; i++)
 	{
 		printf("%X, ", start[i]);

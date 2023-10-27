@@ -55,6 +55,6 @@ void console_putbytes(const char *s, int len);
 
 void get_curseur(uint16_t *lig, uint16_t *col);
 
-void printv(uint32_t*start, uint8_t size);
+void printv(uint32_t*start, uint8_t size, uint8_t id);
 
 #endif
